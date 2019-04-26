@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mytest</title>
+</head>
+<body>
+<div id="app">
+</div>
+
+<div id="demo">
+  <input type="text" v-model='first'>
+  <span v-bind:id="first" v-on:click = "doSomething">{{first}}</span>
+  <span :id="first" @click = "doSomething">{{first}}</span>
+  <form action="" v-on:submit.prevent = "onSubmit">
+    <button type="submit">点击我</button>
+    <span>321213</span>
+  </form>
+</div>
+</body>
+</html>

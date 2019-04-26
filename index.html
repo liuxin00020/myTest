@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mytest</title>
+</head>
+<body>
+<ul>
+  <li><a href="#demo">数据绑定</a></li>
+  <li><a href="#computed">计算属性computed</a></li>
+  <li><a href="#watch">监听watch</a></li>
+  <li><a href="#styleBind">class和style绑定</a></li>
+  <li><a href="#condition">条件和循环</a></li>
+  <li><a href="#cpt">组件</a></li>
+</ul>
+
+<div id="app">
+</div>
+
+<div id="demo">
+  <input type="text" v-model='first'>
+  <span v-bind:id="first" v-on:click="doSomething">{{first}}</span>
+  <span :id="first" @click="doSomething">{{first}}</span>
+  <form action="" v-on:submit.prevent="onSubmit">
+    <button type="submit">点击我</button>
+  </form>
+</div>
+
+<h2>computed计算属性</h2>
+<ul id="computed">
+  <li>原数据:{{message}}</li>
+  <li>计算属性后的反转数据:{{reverseMessage}}</li>
+  <li>修改原数据：<input type="text" v-model="message"></li>
+  <li>get：{{changeMessage}}</li>
+  <li>set：<input type="text" v-model="changeMessage"></li>
+</ul>
+
+<h2>watch监听</h2>
+<ul id="watch">
+  <li>输入问题：<input type="text" v-model="question"></li>
+  <li>{{answer}}</li>
+</ul>
+
+<h2>class和style绑定</h2>
+<ul id="styleBind">
+  <li :class="{active:true,default:false}">初始化class</li>
+  <li :class="classObject">动态绑定class
+    <button @click="changeClass">点击切换类名</button>
+  </li>
+  <li :class="[okClass.ok,okClass.error]">数组语法绑定class</li>
+  <li :style="styleObj">这是style绑定</li>
+</ul>
+
+<h2>条件和循环</h2>
+<ul id="condition">
+  <li v-if="isShow">
+    if判断显示（true）
+  </li>
+  <li v-else-if="isShow==false">
+    false显示
+  </li>
+  <li v-else>
+    排除在外的显示
+  </li>
+  <li v-for="(li,index) in list">
+    {{index + " "+li.name + " / " +li.sex}}
+    对象遍历：
+    <span v-for="(item,key,index) in li" style="margin-right: 20px;">
+      {{index+" "+ key+"："+item}}
+    </span>
+  </li>
+
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username" key="20">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address" key="21">
+  </template>
+  <button @click="changeTemp">点击切换模板</button>
+
+  <li style="background-color: palegreen;" v-for="(l,index) in listFilter" :key="index">{{l}}</li>
+  <li style="background-color: pink;" v-for="(l,index) in listChange(list)" :key="index+10">{{l}}</li>
+  <input type="text" @click.middle="test"/>
+</ul>
+
+<h2>组件的使用</h2>
+<ul id="cpt">
+  <h4>监听组件方法</h4>
+  <li v-for="l in list" :key="l.id" :style='{fontSize:pcount+"rem"}'>
+    <el-test1 v-bind:item="l" v-on:click-emit="changeStyle"></el-test1><!-- 监听组件的点击方法 -->
+  </li>
+  <h4>组件中使用v-model</h4>
+  <li>
+    <cpt-model v-model="modeltext"><span>{{modeltext}}</span>检验插槽slot</cpt-model>
+  </li>
+  <li>
+    <button @click="changeComp('acomp')">第一个</button>
+    <button @click="changeComp('bcomp')">第二个</button>
+    <button @click="changeComp('ccomp')">第三个</button>
+    <component v-bind:is="compName"></component>
+  </li>
+</ul>
+
+<div id="innerComp">
+  <comp-a></comp-a>
+  <base-input v-model="msg">{{msg}}这是测试常用组件循环引用</base-input>
+  <base-button></base-button>
+  <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true"
+            :array-data="arrayData" :object-data="objectData"></app-test>
+  <h5>父元素的数据</h5>
+  <ul>
+    <li>{{stringData}}<input type="text" v-model="stringData"></li>
+    <li>{{booleanData}}<input type="text" v-model="booleanData"></li>
+    <li>{{numberData}}<input type="text" v-model="numberData"></li>
+    <li>{{arrayData}}<input type="text" v-model="arrayData"></li>
+    <li>{{objectData}}<input type="text" v-model="objectData"></li>
+
+  </ul>
+</div>
+
+<script src="/dist/build.js"></script>
+</body>
+</html>

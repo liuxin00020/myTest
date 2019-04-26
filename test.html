@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>这是测试动态渲染</title>
+  <script src="node_modules/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<ul id="demo">
+  <li v-for="(v,i) in items">
+    {{ i + " " + v}}
+  </li>
+  <li v-for="(o,key) in obj">{{key+"："+o}}</li>
+</ul>
+
+<div id="example-6">
+  <select v-model="options" multiple="multiple" style="width: 50px;">
+    <option v-for="o in options" :value="o.value">{{o.text}}</option>
+  </select>
+  <br>
+  <span>Selected: {{ selected}}</span>
+</div>
+
+<div id="example-4">
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
+  <br>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
+
+  <input type="number" v-model.number="msg">
+  <span>{{msg}}</span>
+</div>
+
+<script>
+  let vm4 = new Vue({
+    el: '#example-4',
+    data: {
+      picked: 'One',
+      msg:123
+    }
+  })
+  new Vue({
+    el: '#example-6',
+    data: {
+      selected: 'A',
+      options: [
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C' }
+      ]
+    }
+  })
+
+  let vm = new Vue({
+    el: "#demo",
+    data: {
+      items: ["张1", "张2", "张3"],
+      obj: {
+        name: "bob",
+        sex: "man"
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
