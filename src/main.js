@@ -263,6 +263,12 @@ requireComponent.keys().forEach((fileName) => {
   )
 });
 
+class person {
+  constructor(name, sex) {
+    this.name = name;
+    this.sex = sex;
+  }
+}
 
 // 局部组件的使用
 new Vue({
@@ -273,10 +279,13 @@ new Vue({
     booleanData: "true",
     numberData: 123,
     arrayData: [1, 2, 3, 4],
-    objectData: {id: 1, name: '张三'}
+    objectData: {id: 1, name: '张三'},
+    validateData: 'error',
+    personData: new person("对象", "男"),
+    person:person
   },
   components: {
     "comp-a": Test.prototype.compa("这是组件A的测试参数"),
-    "app-test":AppTest
+    "app-test": AppTest
   }
 });

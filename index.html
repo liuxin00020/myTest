@@ -105,19 +105,20 @@
 
 <div id="innerComp">
   <comp-a></comp-a>
-  <base-input v-model="msg">{{msg}}这是测试常用组件循环引用</base-input>
+  <base-input v-model="msg">{{msg}}</base-input>
   <base-button></base-button>
-  <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true"
-            :array-data="arrayData" :object-data="objectData"></app-test>
+
+  <h2>props测试</h2>
   <h5>父元素的数据</h5>
   <ul>
     <li>{{stringData}}<input type="text" v-model="stringData"></li>
     <li>{{booleanData}}<input type="text" v-model="booleanData"></li>
     <li>{{numberData}}<input type="text" v-model="numberData"></li>
-    <li>{{arrayData}}<input type="text" v-model="arrayData"></li>
-    <li>{{objectData}}<input type="text" v-model="objectData"></li>
-
+    <li>{{arrayData}}</li>
+    <li>{{objectData}}</li>
   </ul>
+  <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true"
+            :validate-data="'success'" :person-data = "personData" :peroson = "person"></app-test>
 </div>
 
 <script src="/dist/build.js"></script>
