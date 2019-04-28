@@ -58,7 +58,6 @@
       }
     },
     computed: { // 计算属性
-
     },
     methods: {
       addItem: function () {

@@ -4,6 +4,7 @@ import axios from "axios";
 import _ from "lodash"
 import Test from './components/Test'
 import AppTest from "./components/AppTest";
+import CustomEvent from './components/CustomEvent.vue';
 
 new Vue({
   el: '#app',
@@ -245,7 +246,6 @@ const requireComponent = require.context(
 
 // 遍历所有的base组件
 requireComponent.keys().forEach((fileName) => {
-  debugger
   // 获取组件配置
   const componentConfig = requireComponent(fileName)
 
@@ -282,10 +282,29 @@ new Vue({
     objectData: {id: 1, name: '张三'},
     validateData: 'error',
     personData: new person("对象", "男"),
-    person:person
+    person: person,
+    checkText: true
   },
   components: {
     "comp-a": Test.prototype.compa("这是组件A的测试参数"),
     "app-test": AppTest
+  }
+});
+
+new Vue({
+  el: "#customEvent",
+  components: {
+    CustomEvent
+  },
+  data:{
+    msg:'1234',
+    doc:{
+      title:'doc的title',
+      msg:'doc的msg'
+    }
+  },
+  methods: {
+    showMsg:(msg)=>window.alert("显示父组件的监听事件 : "+msg),
+    showNative:(msg)=>window.alert(msg),
   }
 });

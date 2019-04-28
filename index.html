@@ -6,12 +6,14 @@
 </head>
 <body>
 <ul>
+  <li><a href="base.html" target="_blank">封装的基本控件</a></li>
   <li><a href="#demo">数据绑定</a></li>
   <li><a href="#computed">计算属性computed</a></li>
   <li><a href="#watch">监听watch</a></li>
   <li><a href="#styleBind">class和style绑定</a></li>
   <li><a href="#condition">条件和循环</a></li>
   <li><a href="#cpt">组件</a></li>
+  <li><a href="#custromEvent">自定义事件</a></li>
 </ul>
 
 <div id="app">
@@ -105,7 +107,13 @@
 
 <div id="innerComp">
   <comp-a></comp-a>
-  <base-input v-model="msg">{{msg}}</base-input>
+  <h5>基本控件使用</h5>
+  <base-input v-model="msg" :label="'文本框：'" type="text"></base-input>
+  <base-checkbox v-model="checkText" value="0" :label="'测试1'"></base-checkbox>
+  <base-checkbox v-model="checkText" value="1" :label="'测试2'"></base-checkbox>
+  <base-checkbox v-model="checkText" value="2" :label="'测试3'"></base-checkbox>
+  <div>checkbox的值：{{checkText}}</div>
+
   <base-button></base-button>
 
   <h2>props测试</h2>
@@ -117,9 +125,19 @@
     <li>{{arrayData}}</li>
     <li>{{objectData}}</li>
   </ul>
-  <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true"
+  <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true" :array-data="arrayData"
             :validate-data="'success'" :person-data = "personData" :peroson = "person"></app-test>
 </div>
+
+<h2>自定义事件</h2>
+<ul id="customEvent">
+  <li>
+    <custom-event @btn-click="showMsg" @click.native = "showNative('原生事件绑定')" v-model="msg"
+                  :doc.sync="doc.title"></custom-event>
+    父组件：<input type="text" v-model="doc.title">
+  </li>
+</ul>
+
 
 <script src="/dist/build.js"></script>
 </body>

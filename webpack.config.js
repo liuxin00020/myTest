@@ -87,8 +87,8 @@ module.exports = {
   devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({ //添加在这里
-      template: 'app/index.html',
       filename: 'index.html',
+      template: 'index.html',
       inject: 'body'
     })
   ]
