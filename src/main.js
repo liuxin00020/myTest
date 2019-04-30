@@ -291,20 +291,45 @@ new Vue({
   }
 });
 
+/* 异步组件 */
+Vue.component('asyn-example',
+  (resolve) => require(['./components/base/BaseButton'], resolve)
+  // function (resolve, reject) {
+//   // setTimeout(function () {
+//   //   resolve(BaseButton);
+//   // }, 1000);
+//   require(['./components/base/BaseButton'], resolve)
+// }
+);
+
 new Vue({
   el: "#customEvent",
   components: {
     CustomEvent
   },
-  data:{
-    msg:'1234',
-    doc:{
-      title:'doc的title',
-      msg:'doc的msg'
-    }
+  data: {
+    msg: '1234',
+    doc: {
+      title: 'doc的title',
+      msg: 'doc的msg'
+    },
+    slotName: [
+      {
+        name: 'header',
+        html: '<p>这里是header插槽</p>'
+      },
+      {
+        name: 'default',
+        html: '<p>这里是main插槽</p>'
+      },
+      {
+        name: 'footer',
+        html: '<p>这里是footer插槽</p>'
+      },
+    ]
   },
   methods: {
-    showMsg:(msg)=>window.alert("显示父组件的监听事件 : "+msg),
-    showNative:(msg)=>window.alert(msg),
+    showMsg: (msg) => window.alert("显示父组件的监听事件 : " + msg),
+    showNative: (msg) => window.alert(msg)
   }
 });

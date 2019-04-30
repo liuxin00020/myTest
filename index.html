@@ -126,18 +126,46 @@
     <li>{{objectData}}</li>
   </ul>
   <app-test :string-data="stringData" :number-data="numberData" :boolean-data="true" :array-data="arrayData"
-            :validate-data="'success'" :person-data = "personData" :peroson = "person"></app-test>
+            :validate-data="'success'" :person-data="personData" :peroson="person"></app-test>
 </div>
 
-<h2>自定义事件</h2>
-<ul id="customEvent">
-  <li>
-    <custom-event @btn-click="showMsg" @click.native = "showNative('原生事件绑定')" v-model="msg"
+<div id="customEvent">
+  <h2>自定义事件</h2>
+  <div>
+    <custom-event @btn-click="showMsg" @click.native="showNative('原生事件绑定')" v-model="msg"
                   :doc.sync="doc.title"></custom-event>
     父组件：<input type="text" v-model="doc.title">
-  </li>
-</ul>
+  </div>
+  <h2>插槽</h2>
+  <div>
+    <base-layout>
+      <!-- <template v-slot:header="headerprop">接受子组件插槽绑定的数据  -->
+      <template v-slot:header="{user={lastname:'默认值'}}"> <!-- 此处使用的是结构赋值 也可以直接写为#header={} -->
+        <p>这里是header插槽</p>
+        <p>父组件的数据：{{doc.title}}</p>
+        <p>访问子组件的数据：{{user.lastname}}</p>
+      </template>
+      <template>
+        <p>这里是main插槽</p>
+        <p>第二段落</p>
+      </template>
+      <template v-slot:footer>
+        这里是footer插槽
+      </template>
+    </base-layout>
 
+    <h5>遍历显示插槽</h5>
+    <base-layout>
+      <template v-for="s in slotName" v-slot:[s.name]="slotprops">
+        {{s.html}}
+        <span>{{(slotprops && slotprops.user)?slotprops.user.firstname:''}}</span><!-- 判断是否有插槽数据 -->
+      </template>
+    </base-layout>
+
+    <h5>异步组件</h5>
+    <asyn-example></asyn-example>
+  </div>
+</div>
 
 <script src="/dist/build.js"></script>
 </body>
